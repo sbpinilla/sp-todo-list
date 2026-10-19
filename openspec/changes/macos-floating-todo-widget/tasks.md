@@ -30,7 +30,7 @@ Chain strategy: pending
 
 ## Open items (user confirmation required, NOT decided here)
 - [x] O1 `TodoItem: Codable` in Domain vs DTO in Infrastructure (affects HU 3, 5). (DECIDED: Codable in Domain, no DTO; engram #654)
-- [ ] O2 Storage folder name (`<bundle-id>` vs `sp-todo-list`) (HU 5).
+- [x] O2 Storage folder name (HU 5). (DECIDED: `sp-todo-list`, i.e. `~/Library/Application Support/sp-todo-list/todos.json`; user answered "Sí" to the proposed name, interpreted as `sp-todo-list`; engram `sdd/macos-floating-todo-widget/decision-o2`)
 - [ ] O3 Panel size, margin, styling (HU 6, 7).
 - [x] O4 Error presentation for `lastError` (HU 4, 6). (DECIDED: single red text line below add field; VM exposes `lastError`, red line is HU6; engram #655)
 
@@ -54,8 +54,8 @@ Chain strategy: pending
 - Satisfies: todo-management Add, Remove, Toggle, Persistence (port).
 
 ## HU 5: JSON repository - `feat(infrastructure): add JSONTodoRepository`
-- [ ] 5.1 RED `Tests/TodoInfrastructureTests/JSONTodoRepositoryTests.swift` (temp dir): round-trip same order, missing file = [], corrupt file quarantined + [] no crash, atomic overwrite.
-- [ ] 5.2 GREEN `Sources/TodoInfrastructure/JSONTodoRepository.swift` (versioned envelope, ISO8601).
+- [x] 5.1 RED `Tests/TodoInfrastructureTests/JSONTodoRepositoryTests.swift` (temp dir): round-trip same order, missing file = [], corrupt file quarantined + [] no crash, atomic overwrite.
+- [x] 5.2 GREEN `Sources/TodoInfrastructure/JSONTodoRepository.swift` (versioned envelope, ISO8601).
 - Satisfies: Persistence restore/missing/corrupt.
 
 ## HU 6: UI - `feat(ui): add todo list views`
