@@ -4,6 +4,8 @@ Lista de tareas para macOS que vive en un panel flotante, fijo en la esquina sup
 
 La idea es simple: tu lista de tareas debe estar siempre a la vista, sin cambiar de app, sin abrir ventanas y sin que te quite el foco de lo que estás haciendo.
 
+![Panel de sp-todo-list con tres tareas agrupadas bajo la fecha del día](docs/app.png)
+
 ## Por qué es distinta
 
 La mayoría de las apps de tareas son ventanas normales: se tapan con otras ventanas, hay que buscarlas en el Dock y roban el foco al abrirlas. `sp-todo-list` prioriza que la lista siempre esté visible:
@@ -35,7 +37,7 @@ No hace falta abrir Xcode: es un paquete de Swift Package Manager.
 Clonar el repositorio:
 
 ```sh
-git clone <url-del-repositorio>
+git clone https://github.com/sbpinilla/sp-todo-list.git
 cd sp-todo-list
 ```
 
