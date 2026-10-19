@@ -64,9 +64,9 @@ Chain strategy: pending
 - Satisfies: add field accepts typing [MANUAL].
 
 ## HU 7: Panel - `feat(infrastructure): add floating panel and positioner`
-- [ ] 7.1 RED `WindowPositionerTests.swift`: top-right, notch/menu-bar/Dock rects.
-- [ ] 7.2 GREEN `WindowPositioner.swift`; `FloatingPanel.swift` (level/focus from HU 1 outcome); `PanelController.swift` (show + didChangeScreenParameters).
-- Satisfies: Placement initial, not draggable; Visibility above windows; display change/notch/full-screen/Space [MANUAL].
+- [x] 7.1 RED `WindowPositionerTests.swift`: top-right, notch/menu-bar/Dock rects.
+- [x] 7.2 GREEN `WindowPositioner.swift`; `FloatingPanel.swift` (level/focus from HU 1 outcome); `PanelController.swift` (show + didChangeScreenParameters).
+- Satisfies: Placement initial (WindowPositioner unit-tested), not draggable (isMovable false; AppKit code runtime-only, NOT verified until HU8/9); Visibility above windows; display change/notch/full-screen/Space [MANUAL].
 
 ## HU 8: App wiring - `feat(app): wire composition root and status item`
 - [ ] 8.1 `Sources/SpTodoList/{main,AppDelegate,CompositionRoot,StatusItemController}.swift`: accessory policy, panel on launch, Quit item, no hotkey.
