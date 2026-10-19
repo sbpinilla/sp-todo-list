@@ -1,0 +1,58 @@
+schema: spec-driven
+
+context: |
+  Project: sp-todo-list (greenfield, no commits/source at init time).
+  Goal: native macOS to-do app (add, remove, mark done) shown as an always-on-top
+  floating widget pinned to the top of the screen.
+  Toolchain: Xcode 27.0 (27A266a), Swift 6.4, macOS SDK 27.0, arm64. No project file yet.
+  Workflow: no PRs; work directly on branch master; one conventional commit per work unit (HU);
+  review budget 400 changed lines per commit. Artifacts in English.
+  Persistence: hybrid (engram + openspec).
+
+strict_tdd: false
+# Reason: zero projects discovered (no Package.swift / .xcodeproj) and no explicit
+# workspace-level test command. Re-evaluate after the scaffold HU defines one
+# (e.g. `swift test` or `xcodebuild test -scheme <scheme>`).
+
+projects: []
+
+testing:
+  runner_available:
+    - name: Swift Testing
+      available: true
+      path: Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/Testing.framework
+    - name: XCTest
+      available: true
+      path: Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework
+  commands:
+    workspace: null
+    candidates:
+      - "swift test"
+      - "xcodebuild test -scheme <scheme> -destination 'platform=macOS'"
+  layers:
+    unit: { available: true, tool: "Swift Testing / XCTest (not yet wired)" }
+    integration: { available: true, tool: "XCTest (not yet wired)" }
+    e2e: { available: true, tool: "XCUITest (requires Xcode project; not yet wired)" }
+  coverage: { available: true, command: "swift test --enable-code-coverage / xcodebuild -enableCodeCoverage YES" }
+  quality:
+    linter: { available: false, tool: "swiftlint not installed" }
+    formatter: { available: false, tool: "swiftformat not installed" }
+    type_checker: { available: true, tool: "swiftc / swift build (compiler)" }
+
+rules:
+  proposal:
+    - Keep scope to one deliverable; list work units (HU) sized under 400 changed lines each.
+  specs:
+    - Use Given/When/Then scenarios; cover add, remove, mark done, and always-on-top widget behavior.
+  design:
+    - Prefer a clean separation between domain (todo model/store) and AppKit/SwiftUI window layer.
+    - Document NSPanel/window level, collection behavior, and top-of-screen positioning decisions.
+  tasks:
+    - One task group per HU; each HU maps to exactly one conventional commit on master (no PRs).
+  apply:
+    - Conventional commits only, no AI attribution trailers in commit messages.
+    - Define a workspace-level test command in the first HU so Strict TDD can be re-evaluated.
+  verify:
+    - Run build and tests via the declared workspace command once it exists.
+  archive:
+    - Merge delta specs into openspec/specs before archiving.
