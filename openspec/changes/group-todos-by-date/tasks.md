@@ -67,8 +67,8 @@ Chain strategy: size-exception
 
 ## HU5: Manual QA and hardening
 
-- [ ] 5.1 [MANUAL] Separator look, panel resize on add/delete, menu checkmark, relaunch persistence, VoiceOver header, midnight limitation; display change remains.
-- [ ] 5.2 Run full `swift test`; record results in `openspec/changes/group-todos-by-date/tasks.md`.
+- [x] 5.1 [MANUAL] Confirmed by user ("Todo funciona", 8-step checklist): separator look, panel resize, menu checkmark, relaunch persistence. NOT verified: VoiceOver header, midnight limitation (out of scope), future createdAt, glass look/locales. See `qa-report.md`.
+- [x] 5.2 Full `swift build` and `swift test` run (75 Swift Testing tests, 0 failures); results recorded in `qa-report.md`.
 - Commit: `docs(openspec): record manual QA for group-todos-by-date`
 
 ## Open assumptions (user confirmation needed, not decided)
