@@ -32,6 +32,6 @@ The user was given an 8-step checklist and answered literally: **"Todo funciona"
 
 - VoiceOver header behavior: not tested.
 - Automatic regroup at midnight: known limitation, out of scope, not tested.
-- Future `createdAt` behavior (treated as not-today, hidden when filter is on): unit-tested only; the assumption is NOT confirmed by the user.
+- Future `createdAt` behavior (treated as not-today, hidden when filter is on): unit-tested only; the assumption is now user-confirmed (2026-10-18).
 - Glass look and other locales: not tested.
 - Risk: `DaySeparatorView` calendar vs view-model calendar could mismatch; not exercised manually.

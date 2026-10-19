@@ -71,7 +71,13 @@ Chain strategy: size-exception
 - [x] 5.2 Full `swift build` and `swift test` run (75 Swift Testing tests, 0 failures); results recorded in `qa-report.md`.
 - Commit: `docs(openspec): record manual QA for group-todos-by-date`
 
-## Open assumptions (user confirmation needed, not decided)
+## Open assumptions
 
-- Future `createdAt` is treated as not-today (hidden when filter on).
+- Future `createdAt` is treated as not-today (hidden when filter on): CONFIRMED by the user on 2026-10-18 (see HU6).
 - No midnight regroup (stale until next evaluation).
+
+## HU6: Close verify gap
+
+- [x] 6.1 W1: behavior test `addedItemShowsFirstInTodaySectionWithAndWithoutFilter` for "Add shows on top" (real `AddTodo` clock; RED proven by flipping the sort comparator).
+- [x] 6.2 W2: future `createdAt` assumption confirmed by the user on 2026-10-18 (hidden with the filter on, shown normally otherwise); spec text updated.
+- Commits: `test(application): cover newest to-do shown first after add`, `docs(openspec): confirm future-date assumption and record verify gap fix`

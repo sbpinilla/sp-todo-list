@@ -45,7 +45,7 @@ The VM, port, adapter, root and controller are all `@MainActor`. `Calendar`, `Da
 
 ## Assumptions and Limitations
 
-- A future `createdAt` is treated as not-today: hidden when the filter is on, and shown in its own top section when it is off (assumption).
+- A future `createdAt` is treated as not-today: hidden when the filter is on, and shown in its own top section when it is off (confirmed by the user on 2026-10-18).
 - Stale today: "now" is read on each evaluation (add, toggle, delete, option toggle, launch). There is no midnight regroup, which is a documented limitation.
 - `add` stamps `createdAt` with the real clock (`AddTodo`), while the VM `now` is injectable. VM tests preload items with explicit dates.
 

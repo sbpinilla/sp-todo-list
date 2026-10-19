@@ -40,7 +40,7 @@ The system MUST persist the preference across relaunches through a preference po
 
 ### Requirement: Today evaluation
 
-"Today" MUST be evaluated against the current date each time the list is evaluated (launch, add, toggle, delete, preference change). To-dos with a `createdAt` later than the end of the current day (future) SHOULD be treated as not-today. (Assumption, not confirmed by the user.)
+"Today" MUST be evaluated against the current date each time the list is evaluated (launch, add, toggle, delete, preference change). To-dos with a `createdAt` later than the end of the current day (future) MUST be treated as not-today: hidden when the filter is on and shown normally (newest first) when it is off. (Confirmed by the user on 2026-10-18.)
 
 #### Scenario: Day rolled over
 
