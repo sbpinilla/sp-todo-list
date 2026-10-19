@@ -48,7 +48,7 @@ The system MUST persist the preference across relaunches through a preference po
 - WHEN the list is next evaluated today
 - THEN that item is hidden
 
-#### Scenario: Future createdAt (assumption)
+#### Scenario: Future createdAt
 
 - GIVEN an item whose `createdAt` is after today
 - WHEN the filter is on

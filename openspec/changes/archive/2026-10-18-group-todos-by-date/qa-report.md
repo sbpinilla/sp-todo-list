@@ -26,7 +26,7 @@ The user was given an 8-step checklist and answered literally: **"Todo funciona"
 ## Automated evidence
 
 - `swift build`: Build complete.
-- `swift test`: all suites passed, 0 failures. Swift Testing runs: 16 tests in 4 suites, 18 tests in 3 suites, 4 tests in 1 suite, 37 tests in 3 suites (75 tests total). XCTest runners executed 0 tests (expected, no XCTest cases).
+- `swift test`: all suites passed, 0 failures. Swift Testing runs: 16 tests in 4 suites, 18 tests in 3 suites, 4 tests in 1 suite, 38 tests in 3 suites (76 tests total). XCTest runners executed 0 tests (expected, no XCTest cases).
 
 ## NOT verified
 

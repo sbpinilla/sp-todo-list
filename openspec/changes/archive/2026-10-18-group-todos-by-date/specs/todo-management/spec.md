@@ -41,7 +41,6 @@ The system MUST display to-dos in sections, one per creation day (by `createdAt`
 ### Requirement: Add to-do
 
 The system MUST add a new, not-done item, stamped with the current time, when the user submits non-empty text. It MUST be displayed newest-first (top of today's section). The system MUST NOT add an item whose text is empty or whitespace-only.
-(Previously: the item was appended to the list; no display order was specified.)
 
 #### Scenario: Add valid text
 
@@ -64,7 +63,6 @@ The system MUST add a new, not-done item, stamped with the current time, when th
 ### Requirement: Persistence
 
 The system MUST persist every change to a JSON file in Application Support via a `TodoRepository` port, using atomic writes. On launch it MUST restore the saved list, preserving the STORED order of the items. The display order is derived from the stored items (newest first, grouped by creation day) and MUST NOT alter the stored order or the JSON format. If the file is missing, it MUST start with an empty list.
-(Previously: "in the same order" did not distinguish stored order from display order.)
 
 #### Scenario: Survives relaunch
 
