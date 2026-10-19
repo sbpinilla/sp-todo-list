@@ -155,6 +155,31 @@ import TodoDomain
         #expect(vm.items.map(\.title) == ["old", "fresh"])
     }
 
+    /// Scenario "Add shows on top": uses the real clock (AddTodo stamps `createdAt` with `Date()`),
+    /// so `now` must be the real clock too. The existing item sits at the start of today, which is
+    /// never later than the added one; a midnight rollover inside this test is the only (negligible) flake.
+    @Test func addedItemShowsFirstInTodaySectionWithAndWithoutFilter() throws {
+        let calendar = Calendar.current
+        let earlierToday = TodoItem(title: "earlier", createdAt: calendar.startOfDay(for: Date()))
+        let vm = TodoListViewModel(
+            repository: FakeTodoRepository(items: [earlierToday]),
+            preferences: FakeDisplayPreferences(),
+            now: Date.init,
+            calendar: calendar
+        )
+        vm.load()
+        vm.add(title: "Call Ana")
+        let added = try #require(vm.items.last)
+
+        #expect(vm.sections.count == 1)
+        #expect(vm.sections.first?.items.first == added)
+        #expect(vm.sections.first?.day == calendar.startOfDay(for: Date()))
+
+        vm.setOnlyToday(true)
+        #expect(vm.sections.first?.items.first == added)
+        #expect(vm.sections.first?.items.map(\.title) == ["Call Ana", "earlier"])
+    }
+
     @Test func toggleAndRemoveByIdWorkAcrossSections() {
         let old = TodoItem(title: "old", createdAt: Self.yesterday)
         let new = TodoItem(title: "new", createdAt: Self.now)
