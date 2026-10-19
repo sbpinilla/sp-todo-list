@@ -31,6 +31,12 @@ final class CompositionRoot {
         )
     }
 
+    /// Current "Show only today" value (source of truth is the view model).
+    var isOnlyToday: Bool { viewModel.onlyToday }
+
+    /// Flips the preference; the view model persists it through its port.
+    func toggleOnlyToday() { viewModel.toggleOnlyToday() }
+
     func start() {
         panelController.show()
     }

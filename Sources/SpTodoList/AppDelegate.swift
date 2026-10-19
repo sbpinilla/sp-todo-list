@@ -9,7 +9,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let root = CompositionRoot()
         root.start()
         self.root = root
-        statusItem = StatusItemController(onQuit: { NSApp.terminate(nil) })
+        statusItem = StatusItemController(
+            isOnlyToday: { [weak root] in root?.isOnlyToday ?? false },
+            onToggleOnlyToday: { [weak root] in root?.toggleOnlyToday() },
+            onQuit: { NSApp.terminate(nil) }
+        )
     }
 
     func applicationWillTerminate(_ notification: Notification) {
