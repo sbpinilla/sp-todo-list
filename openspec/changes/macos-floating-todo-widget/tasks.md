@@ -31,7 +31,7 @@ Chain strategy: pending
 ## Open items (user confirmation required, NOT decided here)
 - [x] O1 `TodoItem: Codable` in Domain vs DTO in Infrastructure (affects HU 3, 5). (DECIDED: Codable in Domain, no DTO; engram #654)
 - [x] O2 Storage folder name (HU 5). (DECIDED: `sp-todo-list`, i.e. `~/Library/Application Support/sp-todo-list/todos.json`; user answered "Sí" to the proposed name, interpreted as `sp-todo-list`; engram `sdd/macos-floating-todo-widget/decision-o2`)
-- [ ] O3 Panel size, margin, styling (HU 6, 7).
+- [x] O3 Panel size, margin, styling (HU 6, 7). (DECIDED: glass/material style, ~280pt width, height grows to ~360pt then scrolls, 12pt margin; engram #657. View uses width constant; panel sizing/margin in HU7.)
 - [x] O4 Error presentation for `lastError` (HU 4, 6). (DECIDED: single red text line below add field; VM exposes `lastError`, red line is HU6; engram #655)
 
 ## HU 1: Spike (throwaway) - `spike: validate panel level, focus and placement`
@@ -59,8 +59,8 @@ Chain strategy: pending
 - Satisfies: Persistence restore/missing/corrupt.
 
 ## HU 6: UI - `feat(ui): add todo list views`
-- [ ] 6.1 Atoms `CheckboxButton`, `DeleteButton`, `AddTodoField`, `TodoRowView` in `Sources/TodoUI/`.
-- [ ] 6.2 `TodoListView` (props+closures), `TodoListContainer` (binds VM); smoke test in `Tests/TodoUITests/`.
+- [x] 6.1 Atoms `CheckboxButton`, `DeleteButton`, `AddTodoField`, `TodoRowView` in `Sources/TodoUI/`.
+- [x] 6.2 `TodoListView` (props+closures), `TodoListContainer` (binds VM); smoke test in `Tests/TodoUITests/`.
 - Satisfies: add field accepts typing [MANUAL].
 
 ## HU 7: Panel - `feat(infrastructure): add floating panel and positioner`

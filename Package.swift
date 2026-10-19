@@ -16,6 +16,6 @@ let package = Package(
         .testTarget(name: "TodoDomainTests", dependencies: ["TodoDomain"]),
         .testTarget(name: "TodoApplicationTests", dependencies: ["TodoApplication"]),
         .testTarget(name: "TodoInfrastructureTests", dependencies: ["TodoInfrastructure"]),
-        .testTarget(name: "TodoUITests", dependencies: ["TodoUI"]),
+        .testTarget(name: "TodoUITests", dependencies: ["TodoUI", "TodoDomain", "TodoApplication"]),
     ]
 )
