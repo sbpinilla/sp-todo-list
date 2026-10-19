@@ -1,20 +1,21 @@
 schema: spec-driven
 
 context: |
-  Project: sp-todo-list (greenfield, no commits/source at init time).
+  Project: sp-todo-list (SwiftPM package, hexagonal targets; scaffolded in HU2).
   Goal: native macOS to-do app (add, remove, mark done) shown as an always-on-top
   floating widget pinned to the top of the screen.
-  Toolchain: Xcode 27.0 (27A266a), Swift 6.4, macOS SDK 27.0, arm64. No project file yet.
+  Toolchain: Xcode 27.0 (27A266a), Swift 6.4, macOS SDK 27.0, arm64. SwiftPM package (swift-tools 6.0).
   Workflow: no PRs; work directly on branch master; one conventional commit per work unit (HU);
   review budget 400 changed lines per commit. Artifacts in English.
   Persistence: hybrid (engram + openspec).
 
-strict_tdd: false
-# Reason: zero projects discovered (no Package.swift / .xcodeproj) and no explicit
-# workspace-level test command. Re-evaluate after the scaffold HU defines one
-# (e.g. `swift test` or `xcodebuild test -scheme <scheme>`).
+strict_tdd: true
+# Reason: HU2 scaffold defined the workspace test command `swift test` (Swift Testing).
 
-projects: []
+projects:
+  - name: sp-todo-list
+    path: .
+    manifest: Package.swift
 
 testing:
   runner_available:
@@ -25,13 +26,12 @@ testing:
       available: true
       path: Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework
   commands:
-    workspace: null
+    workspace: "swift test"
     candidates:
-      - "swift test"
       - "xcodebuild test -scheme <scheme> -destination 'platform=macOS'"
   layers:
-    unit: { available: true, tool: "Swift Testing / XCTest (not yet wired)" }
-    integration: { available: true, tool: "XCTest (not yet wired)" }
+    unit: { available: true, tool: "Swift Testing via `swift test` (wired in HU2)" }
+    integration: { available: true, tool: "Swift Testing via `swift test` (temp dirs, fakes)" }
     e2e: { available: true, tool: "XCUITest (requires Xcode project; not yet wired)" }
   coverage: { available: true, command: "swift test --enable-code-coverage / xcodebuild -enableCodeCoverage YES" }
   quality:

@@ -40,9 +40,9 @@ Chain strategy: pending
 - Satisfies [MANUAL]: full-screen overlay, Space switch, typing w/o activation, notch, display change.
 
 ## HU 2: Package skeleton + test command - `build: add swiftpm skeleton and swift test`
-- [ ] 2.1 Replace spike: `Package.swift` (Swift 6, 5 targets + 4 test targets), placeholder files per target.
-- [ ] 2.2 Edit `openspec/config.yaml`: test command `swift test`, Strict TDD true.
-- [ ] 2.3 One trivial test per test target; `swift test` passes.
+- [x] 2.1 Replace spike: `Package.swift` (Swift 6, 5 targets + 4 test targets), placeholder files per target.
+- [x] 2.2 Edit `openspec/config.yaml`: test command `swift test`, Strict TDD true.
+- [x] 2.3 One trivial test per test target; `swift test` passes.
 
 ## HU 3: Domain - `feat(domain): add TodoItem`
 - [ ] 3.1 RED `Tests/TodoDomainTests/TodoItemTests.swift`: init defaults not-done, Codable round-trip (per O1).
