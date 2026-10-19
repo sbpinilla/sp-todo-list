@@ -32,7 +32,7 @@ Chain strategy: pending
 - [x] O1 `TodoItem: Codable` in Domain vs DTO in Infrastructure (affects HU 3, 5). (DECIDED: Codable in Domain, no DTO; engram #654)
 - [ ] O2 Storage folder name (`<bundle-id>` vs `sp-todo-list`) (HU 5).
 - [ ] O3 Panel size, margin, styling (HU 6, 7).
-- [ ] O4 Error presentation for `lastError` (HU 4, 6).
+- [x] O4 Error presentation for `lastError` (HU 4, 6). (DECIDED: single red text line below add field; VM exposes `lastError`, red line is HU6; engram #655)
 
 ## HU 1: Spike (throwaway) - `spike: validate panel level, focus and placement`
 - [x] 1.1 `Package.swift` minimal + `Sources/Spike/main.swift`: accessory app, NSPanel (.nonactivatingPanel+.borderless, canBecomeKey) with a text field.
@@ -49,8 +49,8 @@ Chain strategy: pending
 - [x] 3.2 GREEN `Sources/TodoDomain/TodoItem.swift`.
 
 ## HU 4: Application - `feat(application): add use cases, port and view model`
-- [ ] 4.1 RED `Tests/TodoApplicationTests/`: add valid/trimmed, blank rejected, remove, toggle, toggle twice = original, load error, persist on each change (fake repo).
-- [ ] 4.2 GREEN `TodoRepository.swift`, `AddTodo/RemoveTodo/ToggleTodo/LoadTodos.swift`, `TodoListViewModel.swift`.
+- [x] 4.1 RED `Tests/TodoApplicationTests/`: add valid/trimmed, blank rejected, remove, toggle, toggle twice = original, load error, persist on each change (fake repo).
+- [x] 4.2 GREEN `TodoRepository.swift`, `AddTodo/RemoveTodo/ToggleTodo/LoadTodos.swift`, `TodoListViewModel.swift`.
 - Satisfies: todo-management Add, Remove, Toggle, Persistence (port).
 
 ## HU 5: JSON repository - `feat(infrastructure): add JSONTodoRepository`
