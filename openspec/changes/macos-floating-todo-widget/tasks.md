@@ -29,7 +29,7 @@ Chain strategy: pending
 | 9 | ~60 | manual checklist | revert fixes |
 
 ## Open items (user confirmation required, NOT decided here)
-- [ ] O1 `TodoItem: Codable` in Domain vs DTO in Infrastructure (affects HU 3, 5).
+- [x] O1 `TodoItem: Codable` in Domain vs DTO in Infrastructure (affects HU 3, 5). (DECIDED: Codable in Domain, no DTO; engram #654)
 - [ ] O2 Storage folder name (`<bundle-id>` vs `sp-todo-list`) (HU 5).
 - [ ] O3 Panel size, margin, styling (HU 6, 7).
 - [ ] O4 Error presentation for `lastError` (HU 4, 6).
@@ -45,8 +45,8 @@ Chain strategy: pending
 - [x] 2.3 One trivial test per test target; `swift test` passes.
 
 ## HU 3: Domain - `feat(domain): add TodoItem`
-- [ ] 3.1 RED `Tests/TodoDomainTests/TodoItemTests.swift`: init defaults not-done, Codable round-trip (per O1).
-- [ ] 3.2 GREEN `Sources/TodoDomain/TodoItem.swift`.
+- [x] 3.1 RED `Tests/TodoDomainTests/TodoItemTests.swift`: init defaults not-done, Codable round-trip (per O1).
+- [x] 3.2 GREEN `Sources/TodoDomain/TodoItem.swift`.
 
 ## HU 4: Application - `feat(application): add use cases, port and view model`
 - [ ] 4.1 RED `Tests/TodoApplicationTests/`: add valid/trimmed, blank rejected, remove, toggle, toggle twice = original, load error, persist on each change (fake repo).
