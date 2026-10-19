@@ -69,7 +69,7 @@ Chain strategy: pending
 - Satisfies: Placement initial (WindowPositioner unit-tested), not draggable (isMovable false; AppKit code runtime-only, NOT verified until HU8/9); Visibility above windows; display change/notch/full-screen/Space [MANUAL].
 
 ## HU 8: App wiring - `feat(app): wire composition root and status item`
-- [ ] 8.1 `Sources/SpTodoList/{main,AppDelegate,CompositionRoot,StatusItemController}.swift`: accessory policy, panel on launch, Quit item, no hotkey.
+- [x] 8.1 `Sources/SpTodoList/{main,AppDelegate,CompositionRoot,StatusItemController}.swift`: accessory policy, panel on launch, Quit item, no hotkey. (DONE: launches without crash; no-Dock/Quit/restore [MANUAL] checks remain for HU9; TodoListView scroll area capped at 270pt.)
 - Satisfies [MANUAL]: no Dock icon, Quit removes panel, relaunch restores data.
 
 ## HU 9: Hardening - `fix: harden screen change and notch behavior`

@@ -4,6 +4,8 @@ import TodoDomain
 /// Presentational list: data and closures in, no view model.
 public struct TodoListView: View {
     public static let width: CGFloat = 280
+    /// Scroll area cap so the whole panel stays within ~360pt (field + padding take the rest).
+    static let listMaxHeight: CGFloat = 270
 
     let items: [TodoItem]
     let errorMessage: String?
@@ -41,6 +43,7 @@ public struct TodoListView: View {
                     }
                 }
                 .scrollBounceBehavior(.basedOnSize)
+                .frame(maxHeight: Self.listMaxHeight)
             }
         }
         .padding(12)
