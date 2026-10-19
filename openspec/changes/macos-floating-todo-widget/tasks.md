@@ -74,3 +74,4 @@ Chain strategy: pending
 
 ## HU 9: Hardening - `fix: harden screen change and notch behavior`
 - [ ] 9.1 Run full manual checklist (all [MANUAL] scenarios) on a notch Mac; fix findings; `swift test` green.
+  - Progress (unchecked until user confirms): manual QA on a notch Mac passed panel placement, glass, no Dock icon, typing, full-screen/Spaces, fixed position, notch, persistence. Finding fixed: list/panel did not refresh after the first add (panel height was never recomputed; frameDidChange on the content view is self-driven by the panel). Fix: SwiftUI reports its natural size to `PanelController.contentSizeDidChange`, and the scroll height is explicit (`ListSizing`). Re-test pending (add 3+ items, panel grows, list scrolls after ~270pt, relaunch). Display-change check [MANUAL] still pending (no second monitor).

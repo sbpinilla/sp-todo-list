@@ -12,19 +12,25 @@ public struct TodoListView: View {
     let onAdd: (String) -> Void
     let onToggle: (TodoItem.ID) -> Void
     let onDelete: (TodoItem.ID) -> Void
+    let onContentSizeChange: (CGSize) -> Void
+
+    /// Measured natural height of the rows; drives the scroll area height explicitly.
+    @State private var listContentHeight: CGFloat = 0
 
     public init(
         items: [TodoItem],
         errorMessage: String?,
         onAdd: @escaping (String) -> Void,
         onToggle: @escaping (TodoItem.ID) -> Void,
-        onDelete: @escaping (TodoItem.ID) -> Void
+        onDelete: @escaping (TodoItem.ID) -> Void,
+        onContentSizeChange: @escaping (CGSize) -> Void = { _ in }
     ) {
         self.items = items
         self.errorMessage = errorMessage
         self.onAdd = onAdd
         self.onToggle = onToggle
         self.onDelete = onDelete
+        self.onContentSizeChange = onContentSizeChange
     }
 
     public var body: some View {
@@ -41,13 +47,15 @@ public struct TodoListView: View {
                             )
                         }
                     }
+                    .onGeometryChange(for: CGFloat.self, of: { $0.size.height }) { listContentHeight = $0 }
                 }
                 .scrollBounceBehavior(.basedOnSize)
-                .frame(maxHeight: Self.listMaxHeight)
+                .frame(height: ListSizing.height(forContent: listContentHeight, max: Self.listMaxHeight))
             }
         }
         .padding(12)
         .frame(width: Self.width)
+        .onGeometryChange(for: CGSize.self, of: { $0.size }, action: onContentSizeChange)
         .modifier(GlassBackground())
     }
 }

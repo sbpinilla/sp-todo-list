@@ -16,7 +16,16 @@ final class CompositionRoot {
         // Load before building the view so a relaunch restores items in the first layout.
         viewModel.load()
         let hosting = NSHostingView(rootView: TodoListContainer(viewModel: viewModel))
-        panelController = PanelController(contentView: hosting)
+        let controller = PanelController(contentView: hosting)
+        panelController = controller
+        // The view reports its natural size; the panel follows it (frame-change observation can't,
+        // because the panel itself dictates the hosting view's frame).
+        hosting.rootView = TodoListContainer(
+            viewModel: viewModel,
+            onContentSizeChange: { [weak controller] size in
+                MainActor.assumeIsolated { controller?.contentSizeDidChange(size) }
+            }
+        )
     }
 
     func start() {

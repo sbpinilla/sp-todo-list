@@ -8,7 +8,8 @@ public final class PanelController {
     private let margin: CGFloat
     private let maxHeight: CGFloat
     private var screenObserver: NSObjectProtocol?
-    private var sizeObserver: NSObjectProtocol?
+    /// Natural size reported by the content (SwiftUI), the source of truth for panel height.
+    private var reportedSize: CGSize?
 
     public init(
         contentView: NSView,
@@ -26,9 +27,7 @@ public final class PanelController {
     public func tearDown() {
         hide()
         if let screenObserver { NotificationCenter.default.removeObserver(screenObserver) }
-        if let sizeObserver { NotificationCenter.default.removeObserver(sizeObserver) }
         screenObserver = nil
-        sizeObserver = nil
     }
 
     public func show() {
@@ -54,7 +53,15 @@ public final class PanelController {
         panel.setFrame(frame, display: true)
     }
 
+    /// Called when the content's natural size changes (list grows/shrinks); re-anchors top-right.
+    public func contentSizeDidChange(_ size: CGSize) {
+        guard size.width > 0, size.height > 0, size != reportedSize else { return }
+        reportedSize = size
+        if panel.isVisible { reposition() }
+    }
+
     private func contentSize() -> CGSize {
+        if let reportedSize { return reportedSize }
         contentView.layoutSubtreeIfNeeded()
         let fitting = contentView.fittingSize
         let width = fitting.width > 0 ? fitting.width : panel.frame.width
@@ -67,16 +74,6 @@ public final class PanelController {
             screenObserver = NotificationCenter.default.addObserver(
                 forName: NSApplication.didChangeScreenParametersNotification,
                 object: nil, queue: .main
-            ) { [weak self] _ in
-                MainActor.assumeIsolated { self?.reposition() }
-            }
-        }
-        if sizeObserver == nil {
-            // Content-size changes (list grows/shrinks) re-anchor the top-right corner.
-            contentView.postsFrameChangedNotifications = true
-            sizeObserver = NotificationCenter.default.addObserver(
-                forName: NSView.frameDidChangeNotification,
-                object: contentView, queue: .main
             ) { [weak self] _ in
                 MainActor.assumeIsolated { self?.reposition() }
             }

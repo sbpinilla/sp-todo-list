@@ -71,4 +71,14 @@ import TodoDomain
         #expect(vm.items.map(\.title) == ["A"])
         #expect(vm.lastError != nil)
     }
+
+    @Test func addingSeveralItemsKeepsAllInOrderAndPersistsThem() {
+        let repo = FakeTodoRepository()
+        let vm = TodoListViewModel(repository: repo)
+        vm.add(title: "A")
+        vm.add(title: "B")
+        vm.add(title: "C")
+        #expect(vm.items.map(\.title) == ["A", "B", "C"])
+        #expect(repo.items == vm.items)
+    }
 }
