@@ -1,4 +1,5 @@
 import SwiftUI
+import TodoApplication
 import TodoDomain
 
 /// Presentational list: data and closures in, no view model.
@@ -7,7 +8,7 @@ public struct TodoListView: View {
     /// Scroll area cap so the whole panel stays within ~360pt (field + padding take the rest).
     static let listMaxHeight: CGFloat = 270
 
-    let items: [TodoItem]
+    let sections: [TodoDaySection]
     let errorMessage: String?
     let onAdd: (String) -> Void
     let onToggle: (TodoItem.ID) -> Void
@@ -18,14 +19,14 @@ public struct TodoListView: View {
     @State private var listContentHeight: CGFloat = 0
 
     public init(
-        items: [TodoItem],
+        sections: [TodoDaySection],
         errorMessage: String?,
         onAdd: @escaping (String) -> Void,
         onToggle: @escaping (TodoItem.ID) -> Void,
         onDelete: @escaping (TodoItem.ID) -> Void,
         onContentSizeChange: @escaping (CGSize) -> Void = { _ in }
     ) {
-        self.items = items
+        self.sections = sections
         self.errorMessage = errorMessage
         self.onAdd = onAdd
         self.onToggle = onToggle
@@ -36,15 +37,18 @@ public struct TodoListView: View {
     public var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             AddTodoField(errorMessage: errorMessage, onSubmit: onAdd)
-            if !items.isEmpty {
+            if !sections.isEmpty {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 8) {
-                        ForEach(items) { item in
-                            TodoRowView(
-                                item: item,
-                                onToggle: { onToggle(item.id) },
-                                onDelete: { onDelete(item.id) }
-                            )
+                        ForEach(sections) { section in
+                            DaySeparatorView(day: section.day)
+                            ForEach(section.items) { item in
+                                TodoRowView(
+                                    item: item,
+                                    onToggle: { onToggle(item.id) },
+                                    onDelete: { onDelete(item.id) }
+                                )
+                            }
                         }
                     }
                     .onGeometryChange(for: CGFloat.self, of: { $0.size.height }) { listContentHeight = $0 }
@@ -75,9 +79,11 @@ struct GlassBackground: ViewModifier {
 
 #Preview("List") {
     TodoListView(
-        items: [
-            TodoItem(title: "Buy milk"),
-            TodoItem(title: "Send report", isDone: true),
+        sections: [
+            TodoDaySection(day: Date(), items: [
+                TodoItem(title: "Buy milk"),
+                TodoItem(title: "Send report", isDone: true),
+            ]),
         ],
         errorMessage: nil,
         onAdd: { _ in }, onToggle: { _ in }, onDelete: { _ in }

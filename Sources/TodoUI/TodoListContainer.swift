@@ -16,7 +16,7 @@ public struct TodoListContainer: View {
 
     public var body: some View {
         TodoListView(
-            items: viewModel.items,
+            sections: viewModel.sections,
             errorMessage: viewModel.lastError,
             onAdd: { viewModel.add(title: $0) },
             onToggle: { viewModel.toggle(id: $0) },
