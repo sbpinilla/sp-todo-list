@@ -80,6 +80,6 @@ No migration; file carries `version: 1` for future migrations.
 
 ## Open Questions
 
-- [ ] Spike outcome: final level and focus mechanism.
-- [ ] Domain `Codable` vs infrastructure DTO.
-- [ ] Panel size, styling, error presentation (undecided product items).
+- [x] Spike outcome (HU1) resolved. `.screenSaver` level confirmed by the user to stay above everything; no `.statusBar` fallback needed.
+- [x] O1: Domain `Codable` vs infrastructure DTO resolved. `TodoItem` stays `Codable` in the Domain layer (no DTO).
+- [x] O2-O4: Storage folder resolved as `sp-todo-list`; panel styling resolved as translucent glass with assumed default size (~280pt wide, ~360pt max height, 12pt margin; size values were not chosen by the user); error presentation resolved as a red text line under the add field for `lastError`.
