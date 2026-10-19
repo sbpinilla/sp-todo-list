@@ -1,3 +1,4 @@
+import Foundation
 import Observation
 import TodoDomain
 
@@ -12,12 +13,41 @@ public final class TodoListViewModel {
     private let addTodo: AddTodo
     private let removeTodo: RemoveTodo
     private let toggleTodo: ToggleTodo
+    private let preferences: any DisplayPreferences
+    private let now: () -> Date
+    private let calendar: Calendar
 
-    public init(repository: any TodoRepository) {
+    /// Whether only to-dos created today are shown; persisted through `DisplayPreferences`.
+    public private(set) var onlyToday: Bool
+
+    /// Items grouped by creation day (newest first), derived from `items`, `onlyToday` and `now()`.
+    public var sections: [TodoDaySection] {
+        TodoSections.make(items: items, now: now(), calendar: calendar, onlyToday: onlyToday)
+    }
+
+    public init(
+        repository: any TodoRepository,
+        preferences: any DisplayPreferences,
+        now: @escaping () -> Date = Date.init,
+        calendar: Calendar = .current
+    ) {
+        self.preferences = preferences
+        self.now = now
+        self.calendar = calendar
+        onlyToday = preferences.showOnlyToday
         loadTodos = LoadTodos(repository: repository)
         addTodo = AddTodo(repository: repository)
         removeTodo = RemoveTodo(repository: repository)
         toggleTodo = ToggleTodo(repository: repository)
+    }
+
+    public func setOnlyToday(_ value: Bool) {
+        onlyToday = value
+        preferences.showOnlyToday = value
+    }
+
+    public func toggleOnlyToday() {
+        setOnlyToday(!onlyToday)
     }
 
     public func load() {

@@ -12,7 +12,10 @@ final class CompositionRoot {
 
     init() {
         let repository = JSONTodoRepository(directory: JSONTodoRepository.defaultDirectory)
-        viewModel = TodoListViewModel(repository: repository)
+        viewModel = TodoListViewModel(
+            repository: repository,
+            preferences: UserDefaultsDisplayPreferences()
+        )
         // Load before building the view so a relaunch restores items in the first layout.
         viewModel.load()
         let hosting = NSHostingView(rootView: TodoListContainer(viewModel: viewModel))
